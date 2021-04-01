@@ -47,13 +47,12 @@ export default {
         const filterPosts = computed(() => {
             const regex = new RegExp(searchText.value, 'gi');
             return posts.value.filter(post => {
-                let matchFlag = false;
                 for (const key of Object.keys(post)) {
                     if (regex.test(post[key])) {
-                        matchFlag = true;
+                        return true;
                     }
                 }
-                return matchFlag;
+                return false;
             })
                 .map(post => {
                     const newPost = JSON.parse(JSON.stringify(post));
